@@ -2,18 +2,20 @@ require 'test_helper'
 
 class BoggleTrayGeneratorTest < Test::Unit::TestCase
 
-  LENGTH = 4
-
+  HORIZONTAL = 4
+  VERTICAL = 4
 
   def setup
-    @checker = BoggleHelper.new
+    @checker = BoggleHelper::Helper.new
   end
 
-  test "generate random #{LENGTH} X #{LENGTH} boggle tray" do
+  test "generate random #{HORIZONTAL} X #{VERTICAL} boggle tray" do
 
-    boggle_tray = @checker.generate_random_boggle_tray LENGTH
+    boggle_tray = @checker.generate_random_boggle_tray HORIZONTAL, VERTICAL
 
-    assert_true(boggle_tray.size == LENGTH * LENGTH)
+    puts boggle_tray
+
+    assert_true(boggle_tray.size == HORIZONTAL * VERTICAL)
 
     boggle_tray.each do |key, value|
 
