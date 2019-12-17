@@ -1,0 +1,2 @@
+export const NEW_GAME = 'NEW_GAME_BOARD_TRAY'
+export const ADD_NEW_WORD = 'NEW_PLAYER_WORD'

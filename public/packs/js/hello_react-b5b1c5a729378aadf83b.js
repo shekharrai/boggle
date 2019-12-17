@@ -32419,10 +32419,10 @@ if (true) {
 
       while (timer !== null) {
         if (timer.callback === null) {
-          // Timer was cancelled.
+          // Timer.js was cancelled.
           pop(timerQueue);
         } else if (timer.startTime <= currentTime) {
-          // Timer fired. Transfer to the task queue.
+          // Timer.js fired. Transfer to the task queue.
           pop(timerQueue);
           timer.sortIndex = timer.expirationTime;
           push(taskQueue, timer);

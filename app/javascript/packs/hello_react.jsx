@@ -4,23 +4,15 @@
 
 import React from 'react'
 import ReactDOM from 'react-dom'
-import PropTypes from 'prop-types'
-
-const Hello = props => (
-  <div>Hello {props.name}!</div>
-)
-
-Hello.defaultProps = {
-  name: 'David'
-}
-
-Hello.propTypes = {
-  name: PropTypes.string
-}
+import Boggle from "../components/Boggle";
+import {Provider} from "react-redux";
+import store from "../store/store";
 
 document.addEventListener('DOMContentLoaded', () => {
-  ReactDOM.render(
-    <Hello name="React" />,
-    document.body.appendChild(document.createElement('div')),
-  )
+    ReactDOM.render(
+        <Provider store={store}>
+            <Boggle/>
+        </Provider>,
+        document.body.appendChild(document.createElement('div')),
+    )
 })
