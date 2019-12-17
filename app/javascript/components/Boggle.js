@@ -1,12 +1,13 @@
 import React, {Component} from 'react'
-import {addNewWord, loadNewGame} from '../actions/boggleActions'
+import {addNewWord, loadNewGame, updateHorizontalSize, updateVerticalSize} from '../actions/boggleActions'
 
 import {connect} from "react-redux";
 
 
 class Boggle extends Component {
     componentDidMount() {
-        this.props.loadNewGame(4, 4);
+        this.props.updateHorizontalSize(6);
+        this.props.loadNewGame(6, 4);
     }
 
     render() {
@@ -26,7 +27,7 @@ const mapStateToProps = state => ({
     playerWords: state.playerWords
 });
 
-const mapDispatchToProps = {loadNewGame, addNewWord}
+const mapDispatchToProps = {loadNewGame, addNewWord, updateVerticalSize, updateHorizontalSize}
 
 export default connect(
     mapStateToProps,
