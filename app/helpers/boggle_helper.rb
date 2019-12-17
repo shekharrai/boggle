@@ -33,7 +33,7 @@ module BoggleHelper
       else
         vertical = vertical.to_i
       end
-      random_chars = (0...(vertical * vertical)).map { ALPHABETS[rand(ALPHABETS.length)] }
+      random_chars = (0...(horizontal * vertical)).map { ALPHABETS[rand(ALPHABETS.length)] }
       to_boggle_tray random_chars, horizontal, vertical
     end
 
@@ -47,10 +47,11 @@ module BoggleHelper
 
     def to_boggle_tray(chars, horizontal, vertical)
       boggle_tray = Hash.new
+      char_index = 0
       (0..(horizontal - 1)).each do |x_index|
         (0..(vertical - 1)).each do |y_index|
-          char_index = y_index + (x_index * horizontal)
           boggle_tray[[x_index, y_index]] = chars[char_index]
+          char_index = char_index + 1
         end
       end
       return boggle_tray
