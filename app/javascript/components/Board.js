@@ -1,39 +1,25 @@
-import React from 'react'
+import React, {Component} from 'react'
+import {connect} from "react-redux";
 
-const Board = (props) => {
+class Board extends Component {
+    componentDidMount() {
+    }
+    render() {
 
-
-    return (
-        <div className="container">
-
-            <table>
-                <tbody>
-                <td>e</td>
-                <td>a</td>
-                <td>t</td>
-                <td>r</td>
-                </tbody>
-                <tbody>
-                <td>e</td>
-                <td>a</td>
-                <td>t</td>
-                <td>r</td>
-                </tbody>
-                <tbody>
-                <td>e</td>
-                <td>a</td>
-                <td>t</td>
-                <td>r</td>
-                </tbody>
-                <tbody>
-                <td>e</td>
-                <td>a</td>
-                <td>t</td>
-                <td>r</td>
-                </tbody>
-            </table>
-        </div>
-    )
+        return (
+            <div className="container">
+                <p>Hello</p>
+            </div>
+        )
+    }
 }
 
-export default Board
+const mapStateToProps = state => ({
+    board: state.tray,
+    horizontalSize: state.horizontalSize,
+    verticalSize: state.verticalSize
+});
+
+export default connect(
+    mapStateToProps
+)(Board);

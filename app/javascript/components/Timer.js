@@ -1,11 +1,35 @@
-import React from 'react'
+import React, {Component} from 'react'
+import {connect} from "react-redux";
+import {countDown} from "../actions/boggleActions";
 
-const Timer = () => {
-    return (
-        <div className="container">
-            <p>timer</p>
-        </div>
-    )
+class Timer extends Component {
+    componentDidMount() {
+        this.myInterval = setInterval(() => {
+            if (this.props.timer == 0) {
+                clearInterval(this.myInterval);
+                this.props.stopGame();
+            } else {
+                this.props.countDown();
+            }
+        }, 1000)
+    }
+
+    render() {
+        return (
+            <div>
+                {this.props.timer}
+            </div>
+        )
+    }
 }
 
-export default Timer
+const mapStateToProps = state => ({
+    timer: state.timer
+});
+
+const mapDispatchToProps = {countDown, stopGame};
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Timer);
