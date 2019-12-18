@@ -1,4 +1,5 @@
 import {
+    ADD_ERROR_MESSAGE,
     ADD_NEW_WORD,
     COUNT_DOWN,
     NEW_GAME,
@@ -14,24 +15,38 @@ const initialState = {
     tray: [],
     horizontalSize: 4,
     verticalSize: 4,
-    words: [],
-    playerWords: [],
+    words: [''],
+    dictionary: [],
+    score: 0,
+    message: '',
     timer: 60
 }
 
+function pushable(validWords, word, updatePlayerWords) {
+    return validWords.includes(word)
+        && !updatePlayerWords.includes(word);
+}
+
 function reducer(state = initialState, action) {
-    console.log(action);
     switch (action.type) {
         case NEW_GAME:
             return {
                 ...state,
                 tray: action.payload.tray,
-                words: action.payload.words
+                dictionary: action.payload.words
             };
         case ADD_NEW_WORD:
+            let updatedWords = state.words;
+            let updateScore = state.score;
+            let word = action.word;
+            if (pushable(state.dictionary, word, updatedWords)) {
+                updatedWords.push(word);
+                updateScore = updateScore + word.length;
+            }
             return {
                 ...state,
-                playerWords: state.playerWords.push(action.word)
+                words: updatedWords,
+                score: updateScore
             };
         case UPDATE_HORIZONTAL_SIZE:
             return {
@@ -48,10 +63,15 @@ function reducer(state = initialState, action) {
                 ...state,
                 timer: state.timer - 1
             };
+        case ADD_ERROR_MESSAGE:
+            return {
+                ...state,
+                message: action.message
+            };
         case STOP_GAME:
             return {
                 ...state,
-                timer: 60
+                timer: 0
             };
         default:
             return state;

@@ -5,7 +5,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import Boggle from "../components/Boggle";
-import {Provider} from "react-redux";
+import {Provider} from "react-redux"
+import 'bootstrap/dist/css/bootstrap.min.css';
 import store from "../store/store";
 
 document.addEventListener('DOMContentLoaded', () => {

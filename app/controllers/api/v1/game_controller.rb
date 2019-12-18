@@ -8,8 +8,6 @@ class Api::V1::GameController < ApplicationController
 
     @words = @@boggle_helper.get_words(@board)
 
-    @tray = @board.map { |key, value| value }
-
-    render json: {tray: @tray, words: @words}
+    render json: {tray: @board, words: @words}
   end
 end

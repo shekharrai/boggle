@@ -1,51 +1,96 @@
 import React, {Component} from 'react'
-import {addNewWord, loadNewGame, updateHorizontalSize, updateVerticalSize} from '../actions/boggleActions'
+import {
+    addNewWord,
+    loadNewGame,
+    updateHorizontalSize,
+    updateVerticalSize,
+    wordErrorMessage
+} from '../actions/boggleActions'
 
 import {connect} from "react-redux";
 import TitleBar from "./TitleBar";
-import Timer from "./Timer";
 import Board from "./Board";
-import WordLister from "./WordLister";
 
 class Boggle extends Component {
+
     componentDidMount() {
-        this.props.updateHorizontalSize(6);
-        this.props.loadNewGame(6, 4);
-        console.log(this.props)
+        console.log('componentDidMount')
+        this.props.updateHorizontalSize(4);
+        this.props.loadNewGame(4, 4);
+    }
+
+    _handleKeyDown(e) {
+        if (e.key === 'Enter') {
+            let word = e.target.value;
+            if (this.props.dictionary.includes(word)) {
+                this.props.wordErrorMessage('');
+                if (this.shouldAdd(word)) {
+                    this.props.addNewWord(word);
+                }
+            } else {
+                let message = "Invalid Word : " + word;
+                this.props.wordErrorMessage(message);
+            }
+        }
+    };
+
+    shouldAdd(word) {
+        return !this.props.words.includes(word) && word.length > 1;
     }
 
     render() {
         return (
+            <div style={{width: 750}}
+                 className="container shadow p-3 mb-3 rounded"
+                 align="center">
+                <div className="card-header">
+                    <div>
+                        <label style={{fontSize: 23}}>Boggle</label>
+                    </div>
+                </div>
+                <div className="btn card text-center">
+                    <div className="card-header">
+                        <TitleBar/>
+                    </div>
+                    <div className="card-body">
+                        <Board/>
+                    </div>
+                    <div className="card-footer">
 
-            <div className="container" align="center">
-                <div>
-                    <TitleBar/>
-                </div>
-                <div>
-                    <Timer/>
-                </div>
-                <div>
-                    <Board/>
-                </div>
-                <div>
-                    <WordLister/>
-                </div>
-                <div>
-                    <input type="text" placeholder="Word"></input>
+                        <input
+                            type="text"
+                            placeholder="Enter Word"
+                            onKeyDown={this._handleKeyDown.bind(this)}
+                            disabled={this.props.timer === 0}
+                        />
+                        <div>
+                            <label className="badge badge-danger m-3"
+                                   style={{fontSize: 15}}>{this.props.message}</label>
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
         )
-    }
+    };
 }
 
 const mapStateToProps = state => ({
-    board: state.board,
-    words: state.words,
-    playerWords: state.playerWords
+    tray: state.tray,
+    dictionary: state.dictionary,
+    timer: state.timer,
+    message: state.message,
+    words: state.words
 });
 
-const mapDispatchToProps = {loadNewGame, addNewWord, updateVerticalSize, updateHorizontalSize}
+const mapDispatchToProps = {
+    loadNewGame,
+    addNewWord,
+    updateVerticalSize,
+    updateHorizontalSize,
+    wordErrorMessage
+};
 
 export default connect(
     mapStateToProps,

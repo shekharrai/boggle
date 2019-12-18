@@ -1,10 +1,34 @@
-import React from 'react'
+import React, {Component} from 'react'
+import {connect} from "react-redux";
 
-const WordLister = () => {
-    return (
-        <div className="container">
-        </div>
-    )
+class WordLister extends Component {
+
+    render() {
+        return (
+            <div>
+                <div>
+                    <label style={{fontSize: 19}} className={"badge badge-info"}>Words</label>
+                </div>
+                <div className={"overflow-auto"}>
+                    {
+                        this.props.words.map(word =>
+                            <div style={{fontSize: 17}} key={word}>
+                                <div className={"badge badge-success"}>
+                                    {word}
+                                </div>
+                            </div>)
+                    }
+                </div>
+            </div>
+        )
+    }
 }
 
-export default WordLister
+const mapStateToProps = state => ({
+    words: state.words,
+    dictionary: state.dictionary
+});
+
+export default connect(
+    mapStateToProps
+)(WordLister);
