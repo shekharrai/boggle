@@ -1,10 +1,9 @@
 import {
-    ADD_ERROR_MESSAGE,
     ADD_NEW_WORD,
     COUNT_DOWN,
     NEW_GAME,
-    STOP_GAME,
     UPDATE_HORIZONTAL_SIZE,
+    UPDATE_MESSAGE,
     UPDATE_VERTICAL_SIZE
 } from "./types";
 
@@ -12,10 +11,9 @@ import {
 const gameTray = (payload) => ({type: NEW_GAME, payload});
 const addWord = (word) => ({type: ADD_NEW_WORD, word});
 const horizontalSize = (size) => ({type: UPDATE_HORIZONTAL_SIZE, size});
-const errorMessage = (message) => ({type: ADD_ERROR_MESSAGE, message: message});
+const setMessage = (message) => ({type: UPDATE_MESSAGE, message: message});
 const verticalSize = (size) => ({type: UPDATE_VERTICAL_SIZE, size});
 const timer = () => ({type: COUNT_DOWN});
-const stop = () => ({type: STOP_GAME});
 
 
 export function loadNewGame(horizontal, vertical) {
@@ -46,20 +44,14 @@ export function updateHorizontalSize(size) {
     }
 };
 
-export function wordErrorMessage(message) {
+export function updateMessage(message) {
     return dispatch => {
-        dispatch(errorMessage(message))
+        dispatch(setMessage(message))
     }
 };
 
 export function countDown() {
     return dispatch => {
         dispatch(timer())
-    }
-};
-
-export function stopGame() {
-    return dispatch => {
-        dispatch(stop())
     }
 };

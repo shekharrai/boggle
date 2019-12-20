@@ -3,8 +3,8 @@ import {
     addNewWord,
     loadNewGame,
     updateHorizontalSize,
-    updateVerticalSize,
-    wordErrorMessage
+    updateMessage,
+    updateVerticalSize
 } from '../actions/boggleActions'
 
 import {connect} from "react-redux";
@@ -13,22 +13,25 @@ import Board from "./Board";
 
 class Boggle extends Component {
 
-    componentDidMount() {
-        this.props.updateHorizontalSize(4);
-        this.props.loadNewGame(4, 4);
-    }
+    _handleKeyDown(event) {
+        if (event.key === 'Enter') {
+            let word = event.target.value;
 
-    _handleKeyDown(e) {
-        if (e.key === 'Enter') {
-            let word = e.target.value;
             if (this.props.dictionary.includes(word)) {
-                this.props.wordErrorMessage('');
+                this.props.updateMessage('');
                 if (this.shouldAdd(word)) {
                     this.props.addNewWord(word);
+                    event.target.value = "";
                 }
             } else {
-                let message = "Invalid Word : " + word;
-                this.props.wordErrorMessage(message);
+                if (word === '') {
+                    this.props.updateMessage('');
+                } else {
+                    let message = "Invalid Word : " + word;
+                    if (this.props.message !== message) {
+                        this.props.updateMessage(message);
+                    }
+                }
             }
         }
     };
@@ -78,9 +81,9 @@ class Boggle extends Component {
 const mapStateToProps = state => ({
     tray: state.tray,
     dictionary: state.dictionary,
-    timer: state.timer,
     message: state.message,
     score: state.score,
+    timer: state.timer,
     words: state.words
 });
 
@@ -89,7 +92,7 @@ const mapDispatchToProps = {
     addNewWord,
     updateVerticalSize,
     updateHorizontalSize,
-    wordErrorMessage
+    updateMessage,
 };
 
 export default connect(

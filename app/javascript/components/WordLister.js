@@ -13,9 +13,9 @@ class WordLister extends Component {
                     {
                         this.props.words.map(word =>
                             <div style={{fontSize: 17}} key={word}>
-                                <div className={"badge badge-success"}>
+                                <label className={"badge badge-success"}>
                                     {word}
-                                </div>
+                                </label>
                             </div>)
                     }
                 </div>

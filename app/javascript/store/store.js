@@ -1,10 +1,9 @@
 import {
-    ADD_ERROR_MESSAGE,
     ADD_NEW_WORD,
     COUNT_DOWN,
     NEW_GAME,
-    STOP_GAME,
     UPDATE_HORIZONTAL_SIZE,
+    UPDATE_MESSAGE,
     UPDATE_VERTICAL_SIZE
 } from "../actions/types";
 import {applyMiddleware, createStore} from "redux";
@@ -33,18 +32,29 @@ function reducer(state = initialState, action) {
             return {
                 ...state,
                 tray: action.payload.tray,
+                words: [],
+                score: 0,
+                timer: 60,
+                message: '',
                 dictionary: action.payload.words
             };
         case ADD_NEW_WORD:
-            let newWords = state.words.slice()
-            newWords.splice(newWords.length, 0, action.word)
-            let newDict = state.dictionary.slice()
-            newDict.splice(newDict.length, 0, action.word)
+            let newWords = state.words.slice();
+            newWords.splice(newWords.length, 0, action.word);
             return {
                 ...state,
                 words: newWords,
-                dictionary: newDict,
                 score: state.score + action.word.length
+            };
+        case COUNT_DOWN:
+            return {
+                ...state,
+                timer: state.timer - 1
+            };
+        case UPDATE_MESSAGE:
+            return {
+                ...state,
+                message: action.message
             };
         case UPDATE_HORIZONTAL_SIZE:
             return {
@@ -56,25 +66,9 @@ function reducer(state = initialState, action) {
                 ...state,
                 verticalSize: action.size
             };
-        case COUNT_DOWN:
-            return {
-                ...state,
-                timer: state.timer - 1
-            };
-        case ADD_ERROR_MESSAGE:
-            return {
-                ...state,
-                message: action.message
-            };
-        case STOP_GAME:
-            return {
-                ...state,
-                timer: 0
-            };
         default:
             return state;
     }
-
 }
 
 const store = createStore(

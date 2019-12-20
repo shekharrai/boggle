@@ -39,7 +39,7 @@ module BoggleHelper
 
     def get_words(boggle_tray)
       # TODO : search words from the boggle_tray
-      words = Array['as', 'this', 'man', 'true', 'sun', 'validate']
+      words = Array['as', 'this', 'man', 'true', 'sun', 'validate', 'others','human','boss','tree', 'ruby']
       return words
     end
 
