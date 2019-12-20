@@ -8,6 +8,12 @@ class Api::V1::GameController < ApplicationController
 
     @words = @@boggle_helper.get_words(@board)
 
-    render json: {tray: @board, words: @words}
+    @tray_map = Hash.new
+
+    @board.each do |k, v|
+      @tray_map["[#{k.join(',')}]"] = v.upcase
+    end
+
+    render json: {tray: @tray_map, words: @words}
   end
 end

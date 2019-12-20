@@ -15,7 +15,7 @@ const initialState = {
     tray: [],
     horizontalSize: 4,
     verticalSize: 4,
-    words: [''],
+    words: [],
     dictionary: [],
     score: 0,
     message: '',
@@ -36,17 +36,15 @@ function reducer(state = initialState, action) {
                 dictionary: action.payload.words
             };
         case ADD_NEW_WORD:
-            let updatedWords = state.words;
-            let updateScore = state.score;
-            let word = action.word;
-            if (pushable(state.dictionary, word, updatedWords)) {
-                updatedWords.push(word);
-                updateScore = updateScore + word.length;
-            }
+            let newWords = state.words.slice()
+            newWords.splice(newWords.length, 0, action.word)
+            let newDict = state.dictionary.slice()
+            newDict.splice(newDict.length, 0, action.word)
             return {
                 ...state,
-                words: updatedWords,
-                score: updateScore
+                words: newWords,
+                dictionary: newDict,
+                score: state.score + action.word.length
             };
         case UPDATE_HORIZONTAL_SIZE:
             return {

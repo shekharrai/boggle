@@ -14,7 +14,6 @@ import Board from "./Board";
 class Boggle extends Component {
 
     componentDidMount() {
-        console.log('componentDidMount')
         this.props.updateHorizontalSize(4);
         this.props.loadNewGame(4, 4);
     }
@@ -35,7 +34,9 @@ class Boggle extends Component {
     };
 
     shouldAdd(word) {
-        return !this.props.words.includes(word) && word.length > 1;
+        return !this.props.words.includes(word)
+            && this.props.dictionary.includes(word)
+            && word.length > 1;
     }
 
     render() {
@@ -56,7 +57,6 @@ class Boggle extends Component {
                         <Board/>
                     </div>
                     <div className="card-footer">
-
                         <input
                             type="text"
                             placeholder="Enter Word"
@@ -71,7 +71,6 @@ class Boggle extends Component {
 
                 </div>
             </div>
-
         )
     };
 }
@@ -81,6 +80,7 @@ const mapStateToProps = state => ({
     dictionary: state.dictionary,
     timer: state.timer,
     message: state.message,
+    score: state.score,
     words: state.words
 });
 

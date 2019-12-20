@@ -10,7 +10,7 @@ import {
 
 
 const gameTray = (payload) => ({type: NEW_GAME, payload});
-const newWOrd = (word) => ({type: ADD_NEW_WORD, word});
+const addWord = (word) => ({type: ADD_NEW_WORD, word});
 const horizontalSize = (size) => ({type: UPDATE_HORIZONTAL_SIZE, size});
 const errorMessage = (message) => ({type: ADD_ERROR_MESSAGE, message: message});
 const verticalSize = (size) => ({type: UPDATE_VERTICAL_SIZE, size});
@@ -30,7 +30,7 @@ export function loadNewGame(horizontal, vertical) {
 
 export function addNewWord(word) {
     return dispatch => {
-        dispatch(newWOrd(word))
+        dispatch(addWord(word))
     }
 };
 

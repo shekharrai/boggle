@@ -8,8 +8,6 @@ class TitleBar extends Component {
 
 
     startNewGame(e) {
-        console.log('start');
-        this.props.countDown();
     };
 
     componentDidMount() {
