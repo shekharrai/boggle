@@ -12,8 +12,8 @@ import thunk from "redux-thunk";
 
 const initialState = {
     tray: [],
-    horizontalSize: 6,
-    verticalSize: 5,
+    horizontalSize: 4,
+    verticalSize: 4,
     words: [],
     score: 0,
     message: '',
