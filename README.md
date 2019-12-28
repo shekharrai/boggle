@@ -24,18 +24,18 @@ Execute these commands to setup and run(dev-mode) application,
 
 ## Description
 
-   • When game starts, new 4x4 board is generated. 
-   
-   • User can type the words which they think they found.
-   
-   • System does validation and adds valid words into a list. 
-   
-   • Systems keeps track of scores, the score is total number of characters in the word. –
-   
-   • If word is invalid an error is displayed. 
-   
-   • When timer runs out user can no longer enter new words, but should see results. 
-   
+       • When game starts, new 4x4 board is generated. 
+       
+       • User can type the words which they think they found.
+       
+       • System does validation and adds valid words into a list. 
+       
+       • Systems keeps track of scores, the score is total number of characters in the word. –
+       
+       • If word is invalid an error is displayed. 
+       
+       • When timer runs out user can no longer enter new words, but should see results. 
+       
 <hr/>
 
 ## Additional feature
