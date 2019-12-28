@@ -1,13 +1,14 @@
 # Boggle
 
-#### Prerequisites
+## Prerequisites
 
 |Software|Version|
 |--------|-------|
 |Ruby|2.5+|
 |Rails|6.+|
+<hr/>
 
-#### Installation
+## Installation
 
 Execute these commands to setup and run(dev-mode) application,
 
@@ -25,7 +26,9 @@ Execute these commands to setup and run(dev-mode) application,
 
 > rails server
 
-#### Description
+<hr/>
+
+## Description
 
    • When game starts, new 4x4 board is generated. 
    
@@ -39,11 +42,15 @@ Execute these commands to setup and run(dev-mode) application,
    
    • When timer runs out user can no longer enter new words, but should see results. 
    
-#### Additional features
+<hr/>
+
+## Additional features
 
    • User can select `5*5` and `6*6` boggle board 
    
-#### Work in progress..
+<hr/>
+
+## Work in progress..
 
 1. Dockerization
 2. Multi-player
