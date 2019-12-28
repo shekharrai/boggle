@@ -12,17 +12,11 @@
 
 Execute these commands to setup and run(dev-mode) application,
 
+> yarn install
+
 > rails db:migrate
 
 > bundle install
-
-> yarn install
-
-> rails webpacker:install
-
-> rails webpacker:install:react
-
-> rails generate react:install
 
 > rails server
 
@@ -44,7 +38,7 @@ Execute these commands to setup and run(dev-mode) application,
    
 <hr/>
 
-## Additional features
+## Additional feature
 
    • User can select `5*5` and `6*6` boggle board 
    
