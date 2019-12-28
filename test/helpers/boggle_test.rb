@@ -27,14 +27,18 @@ class BoggleTest < Test::Unit::TestCase
     end
   end
 
-  test "given valid horizontal words when search then return true" do
-    diagonal_words = Array['is', 'sun']
-    diagonal_words.each do |word|
-      #assert_true @boggle_search.search word
+  test "given valid words when search then return true" do
+    words = Array['as', 'sue', 'sun', 'stake', 'make', 'take', 'is',]
+    words.each do |word|
+      assert_true @boggle_search.search_word word
     end
   end
 
-  test "given invalid horizontal words when search then return true" do
+  test "given invalid words when search then return true" do
+    words = Array['asi','asu','invalid', 'word']
+    words.each do |word|
+      assert_false @boggle_search.search_word word
+    end
 
   end
 
