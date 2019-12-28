@@ -18,12 +18,7 @@ const initialState = {
     score: 0,
     message: '',
     timer: 60
-}
-
-function pushable(validWords, word, updatePlayerWords) {
-    return validWords.includes(word)
-        && !updatePlayerWords.includes(word);
-}
+};
 
 function reducer(state = initialState, action) {
     switch (action.type) {

@@ -24,7 +24,7 @@ export function loadNewGame(horizontal, vertical) {
                 dispatch(gameTray(data))
             })
     }
-};
+}
 
 export function addNewWord(word) {
     return dispatch => {
@@ -32,35 +32,35 @@ export function addNewWord(word) {
             .then(response => response.json())
             .then(data => {
                 if (data.valid) {
-                    dispatch(addWord(word))
+                    dispatch(addWord(word));
                     dispatch(setMessage(""))
-                }else{
+                } else {
                     dispatch(setMessage("Invalid word: " + word))
                 }
             })
     }
-};
+}
 
 export function updateVerticalSize(size) {
     return dispatch => {
         dispatch(verticalSize(size))
     }
-};
+}
 
 export function updateHorizontalSize(size) {
     return dispatch => {
         dispatch(horizontalSize(size))
     }
-};
+}
 
 export function updateMessage(message) {
     return dispatch => {
         dispatch(setMessage(message))
     }
-};
+}
 
 export function countDown() {
     return dispatch => {
         dispatch(timer())
     }
-};
+}

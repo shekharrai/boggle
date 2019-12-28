@@ -16,4 +16,4 @@ document.addEventListener('DOMContentLoaded', () => {
         </Provider>,
         document.body.appendChild(document.createElement('div')),
     )
-})
+});

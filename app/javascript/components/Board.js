@@ -23,7 +23,7 @@ class Board extends Component {
             )
         });
 
-        console.log(boggleBoard)
+        console.log(boggleBoard);
 
         return (
             <div>
