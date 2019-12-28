@@ -28,7 +28,16 @@ export function loadNewGame(horizontal, vertical) {
 
 export function addNewWord(word) {
     return dispatch => {
-        dispatch(addWord(word))
+        fetch('/api/v1/boggle/check?word=' + word)
+            .then(response => response.json())
+            .then(data => {
+                if (data.valid) {
+                    dispatch(addWord(word))
+                    dispatch(setMessage(""))
+                }else{
+                    dispatch(setMessage("Invalid word: " + word))
+                }
+            })
     }
 };
 

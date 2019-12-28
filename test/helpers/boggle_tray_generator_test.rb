@@ -9,11 +9,9 @@ class BoggleTrayGeneratorTest < Test::Unit::TestCase
     @checker = BoggleHelper::Helper.new
   end
 
-  test "generate random #{HORIZONTAL} X #{VERTICAL} boggle tray" do
+  test "generate random #{HORIZONTAL} X #{VERTICAL} boggle tray and check the alphabet letters" do
 
     boggle_tray = @checker.generate_random_boggle_tray HORIZONTAL, VERTICAL
-
-    puts boggle_tray
 
     assert_true(boggle_tray.size == HORIZONTAL * VERTICAL)
 

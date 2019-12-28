@@ -25,8 +25,7 @@ class WordLister extends Component {
 }
 
 const mapStateToProps = state => ({
-    words: state.words,
-    dictionary: state.dictionary
+    words: state.words
 });
 
 export default connect(

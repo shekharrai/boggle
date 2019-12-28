@@ -10,18 +10,6 @@ module BoggleHelper
       check
     end
 
-    def is_prefix_word(word)
-      speller = FFI::Aspell::Speller.open('en_US')
-      suggestions = speller.suggestions word
-      speller.close
-      suggestions.each do |suggestion|
-        if suggestion.include? word
-          return true
-        end
-      end
-      return false
-    end
-
     def generate_random_boggle_tray(horizontal, vertical)
       if nil == horizontal
         horizontal = 4
@@ -36,18 +24,12 @@ module BoggleHelper
 
       random_chars = (0...(horizontal * vertical)).map { ALPHABETS[rand(ALPHABETS.length)] }
 
-      return to_boggle_tray(random_chars, horizontal, vertical)
-    end
-
-    def get_words(boggle_tray)
-      # TODO : search words from the boggle_tray
-      words = Array['as', 'this', 'man', 'true', 'sun', 'validate', 'others', 'human', 'boss', 'tree', 'ruby']
-      return words
+      return boggle_tray(random_chars, horizontal, vertical)
     end
 
     private
 
-    def to_boggle_tray(chars, horizontal, vertical)
+    def boggle_tray(chars, horizontal, vertical)
       boggle_tray = Hash.new
       char_index = 0
       (0..(horizontal - 1)).each do |x_index|

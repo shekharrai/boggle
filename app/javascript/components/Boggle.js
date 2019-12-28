@@ -1,11 +1,5 @@
 import React, {Component} from 'react'
-import {
-    addNewWord,
-    loadNewGame,
-    updateHorizontalSize,
-    updateMessage,
-    updateVerticalSize
-} from '../actions/boggleActions'
+import {addNewWord, loadNewGame, updateHorizontalSize, updateVerticalSize} from '../actions/boggleActions'
 
 import {connect} from "react-redux";
 import TitleBar from "./TitleBar";
@@ -13,38 +7,26 @@ import Board from "./Board";
 
 class Boggle extends Component {
 
-    _handleKeyDown(event) {
+    handleKeyDown(event) {
         if (event.key === 'Enter') {
             let word = event.target.value;
 
-            if (this.props.dictionary.includes(word)) {
-                this.props.updateMessage('');
-                if (this.shouldAdd(word)) {
-                    this.props.addNewWord(word);
-                    event.target.value = "";
-                }
-            } else {
-                if (word === '') {
-                    this.props.updateMessage('');
-                } else {
-                    let message = "Invalid Word : " + word;
-                    if (this.props.message !== message) {
-                        this.props.updateMessage(message);
-                    }
-                }
+            if (this.shouldAdd(word)) {
+                this.props.addNewWord(word);
             }
+
+            event.target.value = "";
         }
     };
 
     shouldAdd(word) {
         return !this.props.words.includes(word)
-            && this.props.dictionary.includes(word)
             && word.length > 1;
     }
 
     render() {
         return (
-            <div style={{width: 750}}
+            <div style={{width: 850}}
                  className="container shadow p-3 mb-3 rounded"
                  align="center">
                 <div className="card-header">
@@ -63,7 +45,7 @@ class Boggle extends Component {
                         <input
                             type="text"
                             placeholder="Enter Word"
-                            onKeyDown={this._handleKeyDown.bind(this)}
+                            onKeyDown={this.handleKeyDown.bind(this)}
                             disabled={this.props.timer === 0}
                         />
                         <div>
@@ -80,7 +62,6 @@ class Boggle extends Component {
 
 const mapStateToProps = state => ({
     tray: state.tray,
-    dictionary: state.dictionary,
     message: state.message,
     score: state.score,
     timer: state.timer,
@@ -92,7 +73,6 @@ const mapDispatchToProps = {
     addNewWord,
     updateVerticalSize,
     updateHorizontalSize,
-    updateMessage,
 };
 
 export default connect(

@@ -29,7 +29,7 @@ module BoggleSearch
         @boggle_tray.each do |key, value|
           if (value == first_char)
 
-            current_word = value.slice(0, 1)
+            current_word = value.dup
             visited = Array[key]
             neighbours = get_neighbours_indices(key, visited)
             recursive_search(word, current_word, neighbours, visited)

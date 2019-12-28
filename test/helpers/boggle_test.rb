@@ -20,6 +20,7 @@ class BoggleTest < Test::Unit::TestCase
   test "check static boggle tray" do
 
     assert_true(@boggle_tray.size == 16)
+
     @boggle_tray.each do |key, value|
 
       assert_equal(0, value =~ /[a-z]/)
@@ -28,22 +29,26 @@ class BoggleTest < Test::Unit::TestCase
   end
 
   test "given valid words when search then return true" do
+
     words = Array['as', 'sue', 'sun', 'stake', 'make', 'take', 'is',]
+
     words.each do |word|
+
       assert_true @boggle_search.search_word word
+
     end
   end
 
-  test "given invalid words when search then return true" do
+  test "given invalid words when search then return false" do
     words = Array['asi','asu','invalid', 'word']
+
     words.each do |word|
+
       assert_false @boggle_search.search_word word
     end
-
   end
 
   private
-
   def init_boggle_tray
     @boggle_tray = Hash.new
 

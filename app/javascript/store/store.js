@@ -12,10 +12,9 @@ import thunk from "redux-thunk";
 
 const initialState = {
     tray: [],
-    horizontalSize: 4,
-    verticalSize: 4,
+    horizontalSize: 6,
+    verticalSize: 5,
     words: [],
-    dictionary: [],
     score: 0,
     message: '',
     timer: 60
@@ -35,8 +34,7 @@ function reducer(state = initialState, action) {
                 words: [],
                 score: 0,
                 timer: 60,
-                message: '',
-                dictionary: action.payload.words
+                message: ''
             };
         case ADD_NEW_WORD:
             let newWords = state.words.slice();
