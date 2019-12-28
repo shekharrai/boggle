@@ -33,13 +33,15 @@ module BoggleHelper
       else
         vertical = vertical.to_i
       end
+
       random_chars = (0...(horizontal * vertical)).map { ALPHABETS[rand(ALPHABETS.length)] }
-      to_boggle_tray random_chars, horizontal, vertical
+
+      return to_boggle_tray(random_chars, horizontal, vertical)
     end
 
     def get_words(boggle_tray)
       # TODO : search words from the boggle_tray
-      words = Array['as', 'this', 'man', 'true', 'sun', 'validate', 'others','human','boss','tree', 'ruby']
+      words = Array['as', 'this', 'man', 'true', 'sun', 'validate', 'others', 'human', 'boss', 'tree', 'ruby']
       return words
     end
 

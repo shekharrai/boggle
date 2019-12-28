@@ -5,47 +5,59 @@ module BoggleSearch
 
     @@checker = BoggleHelper::Helper.new
 
-    def search(word)
-      visited = Hash.new
-
-      current_word = ''
-
-      size = Math.sqrt(@boggle_tray.size)
-
-      (0..(size - 1)).each do |x_index|
-        (0..(size - 1)).each do |y_index|
-          find_word(visited, x_index, y_index, size, current_word)
-          false
+    def recursive_search(word, current_word, neighbours, visited)
+      neighbours.each do |neighbour|
+        neighbour_char = @boggle_tray[neighbour]
+        if (word.start_with? (current_word + neighbour_char))
+          current_word << neighbour_char
+          if current_word == word
+            break
+          else
+            new_neighbours = get_neighbours_indices(neighbour, visited)
+            visited.push neighbour
+            recursive_search(word, current_word, new_neighbours, visited)
+          end
         end
       end
     end
 
+    def search_word(word)
+      if @@checker.is_word word
 
-    def find_word(visited, x_index, y_index, size, current_word)
+        first_char = word[0]
 
-      visited[[x_index, y_index]] = true
+        @boggle_tray.each do |key, value|
+          if (value == first_char)
 
-      current_word << @boggle_tray[[x_index, y_index]]
+            current_word = value.slice(0, 1)
+            visited = Array[key]
+            neighbours = get_neighbours_indices(key, visited)
+            recursive_search(word, current_word, neighbours, visited)
 
-      puts "#{current_word} <= #{x_index} : #{y_index}"
-
-      if @@checker.is_word current_word then
-        #puts current_word
-      end
-
-      row = x_index - 1
-      while x_index + 1 >= row and row < size
-        column = y_index - 1
-        while y_index + 1 >= column and column < size
-          if row >= 0 and column >= 0 and !visited[[row, column]]
-            find_word(visited, row, column, size, current_word)
+            if word == current_word
+              return true
+            end
           end
-          column = column + 1
         end
-        row = row + 1
       end
-      current_word[1..-1] = ''
-      visited[[x_index, y_index]] = false
+
+      return false
+    end
+
+    def get_neighbours_indices(index, visited)
+      neighbour_indices = Array.new
+      neighbours = [[-1, -1], [0, -1], [1, -1],
+                    [-1, 0], [1, 0],
+                    [-1, 1], [0, 1], [1, 1]]
+
+      neighbours.each do |neighbour|
+        x = index[0] + neighbour[0]
+        y = index[1] + neighbour[1]
+        if (x > -1 && y > -1 and @boggle_tray[[x, y]] and !visited.include?([x, y]))
+          neighbour_indices.push [x, y]
+        end
+      end
+      return neighbour_indices
     end
   end
 end
