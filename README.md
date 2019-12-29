@@ -35,7 +35,7 @@ Execute these commands to setup and run(dev-mode) application,
 
 ## Additional features
 
-- User can select `5*5` and `6*6` boggle board 
+- User can select `4*4`, `5*5` and `6*6` boggle board 
    
 <hr/>
 

@@ -1,13 +1,21 @@
 import React, {Component} from 'react'
-import {countDown, loadNewGame, updateMessage} from "../actions/boggleActions";
+import {
+    countDown,
+    loadNewGame,
+    updateHorizontalSize,
+    updateMessage,
+    updateVerticalSize
+} from "../actions/boggleActions";
 import {connect} from "react-redux";
 
 class TitleBar extends Component {
 
-    startNewGame = this.startNewGame.bind(this);
-
     startNewGame() {
-        this.props.loadNewGame(this.props.horizontalSize, this.props.verticalSize);
+        this.newGame(this.props.horizontalSize, this.props.verticalSize);
+    };
+
+    newGame(horizontal, vertical) {
+        this.props.loadNewGame(horizontal, vertical);
 
         //to avoid multiple clicks on restart
         clearInterval(this.interval);
@@ -23,7 +31,28 @@ class TitleBar extends Component {
                 this.props.countDown();
             }
         }, 1000)
-    };
+    }
+
+    handleBoggleSize(event) {
+        let size = event.target.value;
+        switch (size) {
+            case "4*4":
+                this.props.updateHorizontalSize(4);
+                this.props.updateVerticalSize(4);
+                this.newGame(4, 4);
+                break;
+            case "5*5":
+                this.props.updateHorizontalSize(5);
+                this.props.updateVerticalSize(5);
+                this.newGame(5, 5);
+                break;
+            case "6*6":
+                this.props.updateHorizontalSize(6);
+                this.props.updateVerticalSize(6);
+                this.newGame(6, 6);
+                break;
+        }
+    }
 
     componentDidMount() {
         this.startNewGame();
@@ -42,9 +71,20 @@ class TitleBar extends Component {
                         </button>
                     </div>
                     <div className="col-sm">
-                        <button className="btn btn-primary" onClick={this.startNewGame}
+                        <button className="btn btn-primary" onClick={this.startNewGame.bind(this)}
                                 style={{width: 160}}>Start/Restart
                         </button>
+                    </div>
+                    <div className="col-sm">
+                        <select
+                            className="btn btn-secondary dropdown-toggle"
+                            style={{width: 160, height: 40}}
+                            onChange={this.handleBoggleSize.bind(this)}
+                        >
+                            <option value="4*4">4 * 4</option>
+                            <option value="5*5">5 * 5</option>
+                            <option value="6*6">6 * 6</option>
+                        </select>
                     </div>
                     <div className="col-sm">
                         <button
@@ -67,7 +107,7 @@ const mapStateToProps = state => ({
     timer: state.timer
 });
 
-const mapDispatchToProps = {countDown, loadNewGame, updateMessage};
+const mapDispatchToProps = {countDown, loadNewGame, updateMessage, updateVerticalSize, updateHorizontalSize};
 
 export default connect(
     mapStateToProps,

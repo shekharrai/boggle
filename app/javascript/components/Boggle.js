@@ -26,7 +26,7 @@ class Boggle extends Component {
 
     render() {
         return (
-            <div style={{width: 850}}
+            <div style={{width: 900}}
                  className="container shadow p-3 mb-3 rounded"
                  align="center">
                 <div className="card-header">
