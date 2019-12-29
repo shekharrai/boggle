@@ -23,8 +23,6 @@ class Board extends Component {
             )
         });
 
-        console.log(boggleBoard);
-
         return (
             <div>
                 <div className="row shadow p-3 mb-3 bg-white rounded">
